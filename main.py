@@ -8,7 +8,8 @@ from tkinter import messagebox
 
 def test():
     driver = webdriver.Chrome()
-    driver.get("https://www.wikipedia.org")
+    driver.get("https://ru.wikipedia.org")
+    driver.maximize_window()
 
     search = driver.find_element(By.ID, "searchInput")
     search.send_keys(en_text.get())
@@ -16,7 +17,7 @@ def test():
 
     wait = WebDriverWait(driver, 10)
     
-    heading = wait.until(expected_conditions.presence_of_element_located((By.ID, "firstHeading")))
+    heading = wait.until(expected_conditions.visibility_of_element_located((By.ID, "firstHeading")))
     
     if en_text.get().lower() in heading.text.lower():
         messagebox.showinfo("Атотест","Тест прошёл успешно!")
